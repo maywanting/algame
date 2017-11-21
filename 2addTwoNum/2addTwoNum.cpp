@@ -56,7 +56,6 @@ public:
 
         return res.next;
     }
-    acds
 };
 
 int main() {
