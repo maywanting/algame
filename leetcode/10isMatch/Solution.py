@@ -3,8 +3,8 @@
 
 class Solution(object):
     def changeP(self, p):
-        res = []
-        j = 0
+        res = [['$', 0]] # start mark
+        j = 1
         for i in range(len(p)):
             if p[i] == '*':
                 res[j-1][1] = 1
@@ -15,31 +15,21 @@ class Solution(object):
 
     def isMatch(self, s, p):
         pArray = self.changeP(p)
-        flag = [[False for col in range(len(s) + 1)] for row in range(len(pArray) + 1)]
+        s = '$' + s
+        flag = [[False for col in range(len(s))] for row in range(len(pArray))]
         flag[0][0] = True
-        for i in range(len(pArray)):
-            flag[i+1][0] = (pArray[i][1] is 1) and (flag[i][0] is 1)
-            for j in range(len(s)) :
-                if (s[j] is pArray[i][0]) or (pArray[i][0] == '.') : # match
-                    if flag[i+1][0] : # *type
-                        flag[i+1][j+1] = flag[i+1][j] or flag[i][j+1] or flag[i][j]
+        for i in range(1, len(pArray)):
+            for j in range(len(s)):
+                if (s[j] is pArray[i][0]) or (pArray[i][0] == '.' and s[j] != '$'): # match
+                    if pArray[i][1] : # *type
+                        flag[i][j] = flag[i-1][j-1] or flag[i-1][j] or flag[i][j-1]
                     else: # simple type
-                        print("i: " + str(i) )
-                        for k in range(i) :
-                            if flag[i - k][j] :
-                                flag[i + 1][j + 1] = True
-                                print("%d %d" % (i, k))
-                                print(flag)
-                                die()
-                                break
-                            if pArray[i - k][1] is 0:
-                                print("%d %d" % (i, k))
-                                print(flag)
-                                die()
-                                break
-            print(flag)
-        return flag[len(pArray)][len(s)]
-
+                        flag[i][j] = flag[i-1][j-1]
+                else: # not match
+                    if pArray[i][1]:  #*type
+                        flag[i][j] = flag[i-1][j]
+        print(flag)
+        return flag[len(pArray)-1][len(s)-1]
 
 solution = Solution()
 #  print(solution.isMatch("aa", "a")) #false
@@ -53,5 +43,8 @@ solution = Solution()
 #  print(solution.isMatch("ab", ".*c")) #false
 #  print(solution.isMatch("aaa", "aaaa")) #false
 #  print(solution.isMatch("aaa", "a*a")) #true
-print(solution.isMatch("aaa", "ab*ac*a")) #true
-#  solution.isMatch("aab", "c*a*b") #false
+#  print(solution.isMatch("aaa", "ab*ac*a")) #true
+#  print(solution.isMatch("aa", "aa*a")) #true
+#  print(solution.isMatch("aab", "c*a*b")) #true
+#  print(solution.isMatch("aab", "c*b")) #true
+print(solution.isMatch("a", ".*..a*")) #false
