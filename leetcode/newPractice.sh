@@ -14,8 +14,7 @@ name=$2
 mkdir $number$name
 touch $number$name"/README.md"
 
-echo "
-class Solution(object):
+echo "class Solution(object):
     def $name(self):
 
 solution = Solution()
