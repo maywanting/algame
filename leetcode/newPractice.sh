@@ -3,19 +3,48 @@
 args=("$@")
 length=${#args[@]}
 
-if [ ! $length -eq 2 ]; then
+if [ ! $length -eq 3 ]; then
     echo "wrong number"
-    exit
+    exit 1
 fi
 
 number=$1
 name=$2
 
-mkdir $number$name
-touch $number$name"/README.md"
-
-echo "class Solution(object):
+case $3 in
+    py)
+        fileContent="class Solution(object):
     def $name(self):
 
-solution = Solution()
-" >> $number$name"/Solution.py"
+solution = Solution()"
+        ;;
+    c)
+        fileContent="$name() {
+}
+
+int main() {
+    return 0;
+}"
+        ;;
+    cpp)
+        fileContent="class Solution {
+public:
+    $name() {
+    }
+};
+
+int main() {
+    return 0;
+}"
+        ;;
+    *)
+        echo "no such type"
+        exit 1
+        ;;
+esac
+
+mkdir $number$name
+touch $number$name"/README.md"
+echo "$fileContent" >> $number$name"/Solution."$3
+
+exit 0
