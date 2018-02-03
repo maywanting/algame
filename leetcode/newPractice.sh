@@ -44,7 +44,14 @@ int main() {
 esac
 
 mkdir $number$name
-touch $number$name"/README.md"
 echo "$fileContent" >> $number$name"/Solution."$3
+
+echo "
+---
+
+# Description
+
+# Solution
+" >> $number$name"/README.md"
 
 exit 0
