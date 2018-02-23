@@ -27,7 +27,11 @@ int main() {
 }"
         ;;
     cpp)
-        fileContent="class Solution {
+        fileContent="#include <iostream>
+
+using namespace std;
+
+class Solution {
 public:
     $name() {
     }
