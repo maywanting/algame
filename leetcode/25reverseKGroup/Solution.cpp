@@ -19,6 +19,36 @@ void printList(ListNode* l) {
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
+        ListNode node = ListNode(0);
+        node.next = head;
+
+        ListNode* front, *p, *q, *end;
+        front = &node;
+        while (true) {
+            //confirm the rest number is enough
+            int number = k;
+            end = front->next;
+            while (number--) {
+                if (end == NULL) {
+                    return node.next;
+                }
+                end = end->next;
+            }
+
+            number = k - 1;
+            p = front->next;
+            q = p->next;
+            while (number--) {
+                //move q to the end of front
+                p->next = q->next;
+                q->next = front->next;
+                front->next = q;
+
+                q = p->next;
+            }
+
+            front = p;
+        }
     }
 };
 
@@ -39,6 +69,6 @@ int main() {
     createList(arr1, 5, &head1);
 
     Solution solution;
-    printList(solution.reverseKGroup(&head1, 2));
+    printList(solution.reverseKGroup(&head1, 3));
     return 0;
 }
