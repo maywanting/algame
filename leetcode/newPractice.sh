@@ -1,4 +1,5 @@
 #!/bin/bash
+# for example: ./newPractice.sh 1 test py
 
 args=("$@")
 length=${#args[@]}
