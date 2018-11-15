@@ -5,7 +5,7 @@ args=("$@")
 length=${#args[@]}
 
 if [ ! $length -eq 3 ]; then
-    echo "wrong number"
+    echo "./newPractice.sh 1 projectname py"
     exit 1
 fi
 
