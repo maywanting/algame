@@ -1,0 +1,25 @@
+class Solution(object):
+    def jump(self, nums):
+        self.nums = nums
+        return self.loopJump(0)
+
+    def loopJump(self, index):
+        print("loop" + str(index))
+        if index >= len(self.nums) - 1:
+            return 0
+        if self.nums[index] == 0:
+            return -1
+
+        minJumpNum = len(self.nums) - index
+        for i in range(1, self.nums[index] + 1):
+            print("i" + str(i))
+            res = self.loopJump(i + index)
+            if (res >= 0) and (minJumpNum > res + 1):
+                minJumpNum = res + 1
+
+        return minJumpNum
+
+
+solution = Solution()
+print(solution.jump([2, 3, 1, 1, 4]))
+# print(solution.jump([2, 1]))

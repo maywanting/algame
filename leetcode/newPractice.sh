@@ -17,7 +17,8 @@ case $3 in
         fileContent="class Solution(object):
     def $name(self):
 
-solution = Solution()"
+solution = Solution()
+print(solution.$name())"
         ;;
     c)
         fileContent="$name() {
