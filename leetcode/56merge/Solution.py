@@ -16,3 +16,8 @@ class Solution(object):
 solution = Solution()
 # print(solution.merge([[1,3],[2,6],[8,10],[15,18]]))
 print(solution.merge([[1,4],[0,4]]))
+class Solution(object):
+    def merge(self):
+
+solution = Solution()
+print(solution.merge())
