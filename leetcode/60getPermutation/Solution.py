@@ -21,3 +21,8 @@ solution = Solution()
 print(solution.getPermutation(4, 1))
 print(solution.getPermutation(4, 9))
 print(solution.getPermutation(3, 3))
+class Solution(object):
+    def getPermutation(self):
+
+solution = Solution()
+print(solution.getPermutation())

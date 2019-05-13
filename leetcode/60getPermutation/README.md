@@ -56,3 +56,10 @@ class Solution(object):
             listN = listN[:index] + listN[index+1:]
         return res
 ```
+
+---
+
+# Description
+
+# Solution
+
